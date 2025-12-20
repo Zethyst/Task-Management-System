@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import Sidebar from './Sidebar';
-import { Loader2 } from 'lucide-react';
+import TaskFlowSkeleton from '../skeletons/MainSkeleton';
 
 export default function MainLayout() {
   const { isAuthenticated, isLoading } = useAuth();
@@ -9,7 +9,7 @@ export default function MainLayout() {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
-        <Loader2 className="h-10 w-10 animate-spin text-green-600" />
+        <TaskFlowSkeleton />
       </div>
     );
   }

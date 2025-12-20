@@ -4,8 +4,9 @@ import { useTasks } from '@/context/TaskContext';
 import type { Task as APITask } from '@/api/tasks';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { CheckCircle2, Clock, AlertTriangle, ListTodo, Loader2 } from 'lucide-react';
+import { CheckCircle2, Clock, AlertTriangle, ListTodo } from 'lucide-react';
 import { isPast } from 'date-fns';
+import { TaskCardsSkeletonGrid } from '@/components/skeletons/TaskSkelton';
 
 
 export default function Dashboard() {
@@ -45,10 +46,7 @@ export default function Dashboard() {
   const renderTaskList = (taskList: APITask[], emptyMessage: string) => {
     if (isLoading) {
       return (
-        <div className="col-span-full text-center py-12">
-          <Loader2 className="h-12 w-12 text-emerald-500 animate-spin mx-auto mb-4" />
-          <p className="text-emerald-600/70">Loading tasks...</p>
-        </div>
+        <TaskCardsSkeletonGrid count={2} />
       );
     }
 
