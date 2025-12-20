@@ -158,19 +158,19 @@ export default function Dashboard() {
         <TabsList className="bg-emerald-100/50 p-1 border border-emerald-200/50">
           <TabsTrigger 
             value="assigned"
-            className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-emerald-700"
+            className="cursor-pointer text-xs md:text-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-emerald-700"
           >
             Assigned to Me ({myAssignedTasks.length})
           </TabsTrigger>
           <TabsTrigger 
             value="created"
-            className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-emerald-700"
+            className="cursor-pointer text-xs md:text-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-green-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-emerald-700"
           >
             Created by Me ({myCreatedTasks.length})
           </TabsTrigger>
           <TabsTrigger 
             value="overdue" 
-            className="cursor-pointer data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-red-600"
+            className="cursor-pointer text-xs md:text-sm data-[state=active]:bg-gradient-to-r data-[state=active]:from-red-500 data-[state=active]:to-red-600 data-[state=active]:text-white data-[state=active]:shadow-md transition-all duration-300 text-red-600"
           >
             Overdue ({overdueTasks.length})
           </TabsTrigger>
