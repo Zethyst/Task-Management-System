@@ -255,11 +255,10 @@ Generate Prisma client:
 
 Run database migrations (if applicable):
 
-    ```sh
-
+```sh
 npx prisma migrate
+```
 
-````
 ## Running Both Frontend - Backend Together
 
 Open two terminals:
