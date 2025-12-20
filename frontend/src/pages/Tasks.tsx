@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useTasks } from '@/context/TaskContext';
 import { type Task } from '@/types/index';
@@ -63,10 +63,7 @@ export default function Tasks() {
     }
   };
 
-  const openEditDialog = (task: Task) => {
-    setSelectedTask(task);
-    setDialogOpen(true);
-  };
+
 
   const openCreateDialog = () => {
     setSelectedTask(undefined);

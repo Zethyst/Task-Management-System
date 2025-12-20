@@ -1,5 +1,4 @@
-import React from 'react';
-import { useAuth } from '@/context/AuthContext';
+
 import { useTasks } from '@/context/TaskContext';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -8,7 +7,6 @@ import { format } from 'date-fns';
 import { cn } from '@/lib/utils';
 
 export default function Notifications() {
-  const { user } = useAuth();
   const { notifications, markNotificationRead, markAllNotificationsRead, isLoading } = useTasks();
 
   const unreadCount = notifications.filter(n => !n.read).length;

@@ -1,21 +1,18 @@
-import React, { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useTasks } from '@/context/TaskContext';
 import type { Task as APITask } from '@/api/tasks';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Plus, CheckCircle2, Clock, AlertTriangle, ListTodo, Loader2 } from 'lucide-react';
+import { CheckCircle2, Clock, AlertTriangle, ListTodo, Loader2 } from 'lucide-react';
 import { isPast } from 'date-fns';
 
 
 export default function Dashboard() {
   const { user } = useAuth();
 
-  const { tasks, createTask, isLoading, updateTask } = useTasks();
+  const { tasks, isLoading } = useTasks();
 
-  const [selectedTask, setSelectedTask] = useState<APITask | undefined>(undefined);
-  const [dialogOpen, setDialogOpen] = useState(false);
   // Tasks are automatically updated in real-time via socket events in TaskContext
   // When a task is assigned, the TaskContext receives the socket event and updates the tasks array
   
@@ -108,43 +105,6 @@ export default function Dashboard() {
         </CardContent>
       </Card>
     ));
-  };
-
-  const handleCreateTask = (data: Omit<APITask, 'id' | 'createdAt' | 'updatedAt'>) => {
-    createTask({
-      title: data.title,
-      description: data.description || '',
-      dueDate: data.dueDate,
-      priority: data.priority as "LOW" | "MEDIUM" | "HIGH" | "URGENT",
-      status: data.status as "TODO" | "IN_PROGRESS" | "REVIEW" | "COMPLETED" | undefined,
-      assignedToId: data.assignedToId || undefined,
-    });
-    setDialogOpen(false);
-  };
-
-  const handleUpdateTask = (data: Omit<APITask, 'id' | 'createdAt' | 'updatedAt'>) => {
-    if (selectedTask) {
-        updateTask(selectedTask.id, {
-        title: data.title,
-        description: data.description || '',
-        dueDate: data.dueDate,
-        priority: data.priority as "LOW" | "MEDIUM" | "HIGH" | "URGENT",
-        status: data.status as "TODO" | "IN_PROGRESS" | "REVIEW" | "COMPLETED" | undefined,
-        assignedToId: data.assignedToId || undefined,
-      });
-      setSelectedTask(undefined);
-      setDialogOpen(false);
-    }
-  };
-
-  const openEditDialog = (task: APITask) => {
-    setSelectedTask(task);
-    setDialogOpen(true);
-  };
-
-  const openCreateDialog = () => {
-    setSelectedTask(undefined);
-    setDialogOpen(true);
   };
 
   return (

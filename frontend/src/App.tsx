@@ -12,7 +12,6 @@ import Notifications from "@/pages/Notifications";
 import Profile from "@/pages/Profile";
 import NotFound from "@/pages/NotFound";
 import { Toaster } from "react-hot-toast";
-import NotificationManager from "@/components/NotificationManager";
 
 const queryClient = new QueryClient();
 
@@ -22,7 +21,6 @@ const App = () => (
       <AuthProvider>
         <TaskProvider>
           <Toaster position="top-right" />
-          <NotificationManager />
           <BrowserRouter>
             <Routes>
               <Route path="/auth" element={<Auth />} />

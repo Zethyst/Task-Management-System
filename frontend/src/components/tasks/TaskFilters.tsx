@@ -1,11 +1,11 @@
-import React from 'react';
+
 import { type TaskFilters, type Priority, type Status } from '@/types/index';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { ArrowUpDown, X } from 'lucide-react';
 
 const priorities: (Priority | 'all')[] = ['all', 'Low', 'Medium', 'High', 'Urgent'];
-const statuses: (Status | 'all')[] = ['all', 'To Do', 'In Progress', 'Review', 'Completed'];
+const statuses: (Status | 'all')[] = ['all', 'Todo', 'In Progress', 'Review', 'Completed'];
 
 interface TaskFiltersProps {
   filters: TaskFilters;

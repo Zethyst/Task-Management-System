@@ -1,4 +1,3 @@
-import React from "react";
 import { type Task, type User } from "@/types/index";
 import { cn } from "@/lib/utils";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";

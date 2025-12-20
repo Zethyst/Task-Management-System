@@ -1,10 +1,8 @@
 import { useState } from "react";
 import { login } from "../api/auth";
-import { useAuth } from "../context/AuthContext";
 import { useNavigate, Link } from "react-router-dom";
 
 export default function Login() {
-  const { setUser } = useAuth();
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -19,8 +17,12 @@ export default function Login() {
 
     try {
       const res = await login({ email, password });
-      setUser(res.data.user);
-      navigate("/dashboard");
+      console.log(res);
+      if (res.data.success) {
+        navigate("/dashboard");
+      } else {
+        setError(res.data.error);
+      }
     } catch (err: any) {
       setError(err.response?.data?.error || "Invalid email or password");
     } finally {
