@@ -10,11 +10,19 @@ router.post("/signup", async (req, res) => {
     const result = await signup(req.body);
     // Auto-login after signup by setting the cookie
     res
-      .cookie("token", result.token, { httpOnly: true, secure: false })
+      .cookie("token", result.token, {
+        httpOnly: true,
+        secure: true, // must be true when deployed on Vercel!
+        sameSite: "none", // must be 'none' for cross-origin cookies
+      })
       .status(201)
       .json({
         message: "Signup successful",
-        user: { id: result.user.id, name: result.user.name, email: result.user.email }
+        user: {
+          id: result.user.id,
+          name: result.user.name,
+          email: result.user.email,
+        },
       });
   } catch (err: any) {
     res.status(400).json({ error: err.message });
@@ -25,8 +33,18 @@ router.post("/login", async (req, res) => {
   try {
     const result = await login(req.body);
     res
-      .cookie("token", result.token, { httpOnly: true, secure: false })
-      .json({ user: { id: result.user.id, name: result.user.name, email: result.user.email } });
+      .cookie("token", result.token, {
+        httpOnly: true,
+        secure: true, // must be true when deployed on Vercel!
+        sameSite: "none", // must be 'none' for cross-origin cookies
+      })
+      .json({
+        user: {
+          id: result.user.id,
+          name: result.user.name,
+          email: result.user.email,
+        },
+      });
   } catch (err: any) {
     res.status(400).json({ error: err.message });
   }
@@ -37,7 +55,11 @@ router.get("/me", requireAuth, (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  res.clearCookie("token", { httpOnly: true, secure: false });
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: true, // must be true when deployed on Vercel!
+    sameSite: "none", // must be 'none' for cross-origin cookies
+  });
   res.json({ message: "Logged out successfully" });
 });
 
@@ -51,10 +73,10 @@ router.get("/users", requireAuth, async (req, res) => {
         createdAt: true,
       },
       orderBy: {
-        name: 'asc',
+        name: "asc",
       },
     });
-    
+
     return res.json({ users });
   } catch (error) {
     console.error("Fetch users error:", error);
