@@ -23,7 +23,7 @@ const config: runtime.GetPrismaClientConfig = {
       "value": "prisma-client"
     },
     "output": {
-      "value": "E:\\WEB DEV\\New Projects\\Task Manager\\backend\\src\\generated\\prisma",
+      "value": "/Users/akshat/Workspace/Web-Dev/New Projects/Task-Management-System/backend/src/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -32,7 +32,7 @@ const config: runtime.GetPrismaClientConfig = {
     "binaryTargets": [
       {
         "fromEnvVar": null,
-        "value": "windows",
+        "value": "darwin-arm64",
         "native": true
       },
       {
@@ -41,7 +41,7 @@ const config: runtime.GetPrismaClientConfig = {
       }
     ],
     "previewFeatures": [],
-    "sourceFilePath": "E:\\WEB DEV\\New Projects\\Task Manager\\backend\\prisma\\schema.prisma",
+    "sourceFilePath": "/Users/akshat/Workspace/Web-Dev/New Projects/Task-Management-System/backend/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativePath": "../../../prisma",

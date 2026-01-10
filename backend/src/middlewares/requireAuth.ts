@@ -8,8 +8,10 @@ export async function requireAuth(
   next: NextFunction
 ) {
   try {
+
     const token = req.cookies.token;
     if (!token) {
+      console.log(`[AUTH] No token found in cookies`);
       return res.status(401).json({ error: "Unauthorized: No token" });
     }
 

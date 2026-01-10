@@ -5,16 +5,20 @@ import { requireAuth } from "../../middlewares/requireAuth.js";
 
 const router = Router();
 
+// Cookie options - secure only in production (HTTPS)
+const isProduction = process.env.NODE_ENV === "production";
+const cookieOptions = {
+  httpOnly: true,
+  secure: isProduction, // true in production (HTTPS), false in development (HTTP)
+  sameSite: isProduction ? ("none" as const) : ("lax" as const), // 'none' requires secure: true, 'lax' for development
+};
+
 router.post("/signup", async (req, res) => {
   try {
     const result = await signup(req.body);
     // Auto-login after signup by setting the cookie
     res
-      .cookie("token", result.token, {
-        httpOnly: true,
-        secure: true, // must be true when deployed on Vercel!
-        sameSite: "none", // must be 'none' for cross-origin cookies
-      })
+      .cookie("token", result.token, cookieOptions)
       .status(201)
       .json({
         message: "Signup successful",
@@ -33,11 +37,7 @@ router.post("/login", async (req, res) => {
   try {
     const result = await login(req.body);
     res
-      .cookie("token", result.token, {
-        httpOnly: true,
-        secure: true, // must be true when deployed on Vercel!
-        sameSite: "none", // must be 'none' for cross-origin cookies
-      })
+      .cookie("token", result.token, cookieOptions)
       .json({
         user: {
           id: result.user.id,
@@ -55,11 +55,7 @@ router.get("/me", requireAuth, (req, res) => {
 });
 
 router.post("/logout", (req, res) => {
-  res.clearCookie("token", {
-    httpOnly: true,
-    secure: true, // must be true when deployed on Vercel!
-    sameSite: "none", // must be 'none' for cross-origin cookies
-  });
+  res.clearCookie("token", cookieOptions);
   res.json({ message: "Logged out successfully" });
 });
 
