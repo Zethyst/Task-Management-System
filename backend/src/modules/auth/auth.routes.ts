@@ -5,7 +5,6 @@ import { requireAuth } from "../../middlewares/requireAuth.js";
 
 const router = Router();
 
-// Cookie options - secure only in production (HTTPS)
 const isProduction = process.env.NODE_ENV === "production";
 const cookieOptions = {
   httpOnly: true,
