@@ -20,7 +20,7 @@ const app = express();
 app.set("trust proxy", 1);
 
 // Normalize frontend URL (remove trailing slash)
-const frontendUrl = (process.env.FRONTEND_URL || "http://localhost:5173" || "https://task-management-system-sepia-gamma.vercel.app").replace(/\/$/, "");
+const frontendUrl = (process.env.FRONTEND_URL || "http://localhost:5173").replace(/\/$/, "");
 
 console.log(`[CORS] Configured for frontend URL: ${frontendUrl}`);
 
