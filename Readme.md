@@ -6,6 +6,18 @@
 
 [Visit Now](https://your-live-app-url.com) 🚀
 
+## 🔑 Demo Credentials
+
+You can use the following credentials to test the application:
+
+- **Email:** `ekansha13@gmail.com`
+- **Password:** `akshat2002`
+
+- **Email:** `ekanshssj@gmail.com`
+- **Password:** `akshat2002`
+
+---
+
 ## 🖥️ Tech Stack
 
 **Frontend:**  

@@ -1,8 +1,11 @@
 import express from "express";
 import cookieParser from "cookie-parser";
+import swaggerUi from "swagger-ui-express";
 import authRoutes from "./modules/auth/auth.routes.js";
 import taskRoutes from "./modules/task/task.routes.js";
 import notificationRoutes from "./modules/notification/notification.routes.js";
+import { apiRateLimiter } from "./middlewares/rateLimiter.js";
+import { swaggerSpec } from "./config/swagger.js";
 
 import cors from "cors";
 import dotenv from "dotenv";
@@ -30,8 +33,18 @@ app.use(cors({
 
 app.use(express.json());
 app.use(cookieParser());
-app.use("/api/auth",authRoutes);
-app.use("/api/tasks",taskRoutes);
-app.use("/api/notifications",notificationRoutes);
+
+// Swagger API Documentation
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec, {
+  customCss: ".swagger-ui .topbar { display: none }",
+  customSiteTitle: "Task Management System API Documentation",
+}));
+
+// Apply general API rate limiting to all API routes
+app.use("/api/v1", apiRateLimiter);
+
+app.use("/api/v1/auth",authRoutes);
+app.use("/api/v1/tasks",taskRoutes);
+app.use("/api/v1/notifications",notificationRoutes);
 
 export default app;
