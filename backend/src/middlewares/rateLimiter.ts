@@ -10,6 +10,10 @@ export const authRateLimiter = rateLimit({
   },
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  // Skip trust proxy validation since we've configured it securely (trust proxy: 1)
+  validate: {
+    trustProxy: false,
+  },
   handler: (req, res) => {
     res.status(429).json({
       error: "Too many authentication attempts. Please try again later.",
@@ -28,6 +32,10 @@ export const apiRateLimiter = rateLimit({
   },
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+  // Skip trust proxy validation since we've configured it securely (trust proxy: 1)
+  validate: {
+    trustProxy: false,
+  },
   handler: (req, res) => {
     res.status(429).json({
       error: "Too many requests. Please try again later.",

@@ -15,8 +15,9 @@ dotenv.config();
 const app = express();
 
 // Trust proxy - required when behind reverse proxy (Render, Heroku, etc.)
-// This allows express-rate-limit to correctly identify client IPs
-app.set("trust proxy", true);
+// Trust only the first proxy (load balancer) to prevent IP spoofing
+// Set to 1 to trust only the first hop, or use specific IPs/network ranges
+app.set("trust proxy", 1);
 
 // Normalize frontend URL (remove trailing slash)
 const frontendUrl = (process.env.FRONTEND_URL || "http://localhost:5173").replace(/\/$/, "");
