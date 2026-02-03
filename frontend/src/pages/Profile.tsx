@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "@/context/AuthContext";
 import {
   Card,
@@ -20,6 +20,20 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false);
   const [name, setName] = useState(user?.name || "");
   const [isLoading, setIsLoading] = useState(false);
+
+  // Force page refresh when visiting the profile route
+  useEffect(() => {
+    const refreshKey = "profile-refreshed";
+    const hasRefreshed = sessionStorage.getItem(refreshKey);
+    
+    if (!hasRefreshed) {
+      sessionStorage.setItem(refreshKey, "true");
+      window.location.reload();
+    } else {
+      // Clear the flag after refresh so it can refresh again on next navigation
+      sessionStorage.removeItem(refreshKey);
+    }
+  }, []);
 
   const getInitials = (name: string) => {
     return name
